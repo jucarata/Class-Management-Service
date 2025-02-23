@@ -1,16 +1,16 @@
 package co.edu.icesi.persistence.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 
 @Entity
-@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "clase")
 public class Classes {
     @Id
