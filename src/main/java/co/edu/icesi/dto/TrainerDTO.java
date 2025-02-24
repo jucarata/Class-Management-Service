@@ -1,10 +1,12 @@
 package co.edu.icesi.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Builder
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class TrainerDTO {
     private Long id;
     private String name;

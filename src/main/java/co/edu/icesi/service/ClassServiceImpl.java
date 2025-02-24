@@ -23,7 +23,7 @@ public class ClassServiceImpl implements ClassService {
 
     private final RestTemplate restTemplate;
 
-    @Value("trainer.service.url")
+    @Value("${trainer.service.url}")
     private String trainerServiceUrl;
 
     @Autowired
@@ -53,9 +53,10 @@ public class ClassServiceImpl implements ClassService {
     }
 
     private ClassesResponseDTO fetchTrainer(Classes classes) {
-        String url = trainerServiceUrl + "/" + classes.getTrainerID().getTrainerId();
-        TrainerDTO trainerDTO = restTemplate.getForObject(url, TrainerDTO.class);
+        //String url = trainerServiceUrl + "/" + classes.getTrainerID().getTrainerId();
+        //TrainerDTO trainerDTO = restTemplate.getForObject(url, TrainerDTO.class);
 
-        return classMapper.toDTO(classes, trainerDTO);
+        //return classMapper.toDTO(classes, trainerDTO);
+        return classMapper.toDTO(classes, new TrainerDTO(1L, "Nombre de prueba"));
     }
 }

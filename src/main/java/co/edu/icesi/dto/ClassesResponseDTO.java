@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class ClassesResponseDTO {
     private Long id;
     private String name;
-    private LocalTime schedule;
+    private LocalDateTime schedule;
     private Integer maxCapacity;
     private TrainerDTO trainerDTO;
 }

@@ -3,6 +3,7 @@ package co.edu.icesi.persistence.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -17,7 +18,7 @@ public class Classes {
     private Long id;
 
     private String name;
-    private LocalTime schedule;
+    private LocalDateTime schedule;
     private Integer maxCapacity;
     private TrainerID trainerID;
 }
