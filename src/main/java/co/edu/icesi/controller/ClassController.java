@@ -7,6 +7,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ClassController {
-    ResponseEntity<Void> scheduleClass(ClassesDTO classDTO);
+    ResponseEntity<String> scheduleClass(ClassesDTO classDTO);
     ResponseEntity<List<ClassesResponseDTO>> getClasses();
 }

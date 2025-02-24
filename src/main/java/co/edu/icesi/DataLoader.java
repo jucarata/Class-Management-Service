@@ -32,10 +32,10 @@ public class DataLoader implements CommandLineRunner {
 
         // Cargar clases de ejemplo
         Classes clase2 = new Classes();
-        clase1.setName("Futbol");
-        clase1.setSchedule(LocalDateTime.now().plusDays(1).withHour(8).withMinute(0));
-        clase1.setMaxCapacity(22);
-        clase1.setTrainerID(new TrainerID(2L));
+        clase2.setName("Futbol");
+        clase2.setSchedule(LocalDateTime.now().plusDays(1).withHour(8).withMinute(0));
+        clase2.setMaxCapacity(22);
+        clase2.setTrainerID(new TrainerID(3L));
         classRepository.save(clase2);
 
         System.out.println("Datos de ejemplo cargados exitosamente.");

@@ -2,6 +2,7 @@ package co.edu.icesi.controller;
 
 import co.edu.icesi.dto.ClassesDTO;
 import co.edu.icesi.dto.ClassesResponseDTO;
+import co.edu.icesi.exceptions.NoTrainerFoundException;
 import co.edu.icesi.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,15 @@ public class ClassControllerImpl implements ClassController {
 
     @Override
     @PostMapping
-    public ResponseEntity<Void> scheduleClass(@RequestBody ClassesDTO classDTO) {
-        boolean wasCreated = classService.scheduleClass(classDTO);
+    public ResponseEntity<String> scheduleClass(@RequestBody ClassesDTO classDTO) {
+        boolean wasCreated = false;
+        try {
+            wasCreated = classService.scheduleClass(classDTO);
+        } catch (NoTrainerFoundException e) {
+            return ResponseEntity.badRequest().body("No hay ningun entrenador que coincida con el id asociado");
+        }
         return wasCreated ? ResponseEntity.status(201).build()
-                : ResponseEntity.badRequest().build();
+                : ResponseEntity.badRequest().body("No se pudo programar la nueva clase, verifique que los datos sean correctos");
     }
 
     @Override

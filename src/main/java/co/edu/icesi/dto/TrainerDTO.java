@@ -9,5 +9,5 @@ import lombok.*;
 @Setter
 public class TrainerDTO {
     private Long id;
-    private String name;
+    private String nombre;
 }

@@ -3,6 +3,7 @@ package co.edu.icesi.service;
 import co.edu.icesi.dto.ClassesDTO;
 import co.edu.icesi.dto.ClassesResponseDTO;
 import co.edu.icesi.dto.TrainerDTO;
+import co.edu.icesi.exceptions.NoTrainerFoundException;
 import co.edu.icesi.mappers.ClassMapper;
 import co.edu.icesi.persistence.model.Classes;
 import co.edu.icesi.persistence.repository.ClassRepository;
@@ -35,8 +36,15 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     @Transactional
-    public boolean scheduleClass(ClassesDTO classDTO) {
+    public boolean scheduleClass(ClassesDTO classDTO) throws NoTrainerFoundException {
         Classes classes = classMapper.toClass(classDTO);
+
+        TrainerDTO trainerDTO = fetchTrainer(classes.getTrainerID().getTrainerId());
+
+        if (trainerDTO == null) {
+            throw new NoTrainerFoundException();
+        }
+
         Classes savedClass = classRepository.save(classes);
         return savedClass.getId() != null;
     }
@@ -53,10 +61,14 @@ public class ClassServiceImpl implements ClassService {
     }
 
     private ClassesResponseDTO fetchTrainer(Classes classes) {
-        //String url = trainerServiceUrl + "/" + classes.getTrainerID().getTrainerId();
-        //TrainerDTO trainerDTO = restTemplate.getForObject(url, TrainerDTO.class);
+        TrainerDTO trainerDTO = fetchTrainer(classes.getTrainerID().getTrainerId());
 
-        //return classMapper.toDTO(classes, trainerDTO);
-        return classMapper.toDTO(classes, new TrainerDTO(1L, "Nombre de prueba"));
+        return classMapper.toDTO(classes, trainerDTO);
+    }
+
+    private TrainerDTO fetchTrainer(Long id){
+        String url = trainerServiceUrl + "/entrenadores/" + id;
+
+        return restTemplate.getForObject(url, TrainerDTO.class);
     }
 }
