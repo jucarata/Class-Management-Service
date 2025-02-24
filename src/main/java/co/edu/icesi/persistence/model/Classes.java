@@ -6,7 +6,6 @@ import lombok.*;
 import java.time.LocalTime;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,7 +19,5 @@ public class Classes {
     private String name;
     private LocalTime schedule;
     private Integer maxCapacity;
-
-    @Embedded
     private TrainerID trainerID;
 }

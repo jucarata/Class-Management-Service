@@ -1,16 +1,18 @@
 package co.edu.icesi.dto;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalTime;
 
 @Builder
-@Data
-public class ClassResponseDTO {
+@Getter
+@Setter
+public class ClassesDTO {
     private Long id;
     private String name;
     private LocalTime schedule;
     private Integer maxCapacity;
-    private TrainerDTO trainerDTO;
+    private Long trainerId;
 }

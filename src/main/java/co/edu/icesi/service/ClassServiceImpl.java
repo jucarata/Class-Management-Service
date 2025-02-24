@@ -1,7 +1,7 @@
 package co.edu.icesi.service;
 
-import co.edu.icesi.dto.ClassDTO;
-import co.edu.icesi.dto.ClassResponseDTO;
+import co.edu.icesi.dto.ClassesDTO;
+import co.edu.icesi.dto.ClassesResponseDTO;
 import co.edu.icesi.dto.TrainerDTO;
 import co.edu.icesi.mappers.ClassMapper;
 import co.edu.icesi.persistence.model.Classes;
@@ -35,7 +35,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     @Transactional
-    public boolean scheduleClass(ClassDTO classDTO) {
+    public boolean scheduleClass(ClassesDTO classDTO) {
         Classes classes = classMapper.toClass(classDTO);
         Classes savedClass = classRepository.save(classes);
         return savedClass.getId() != null;
@@ -43,7 +43,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     @Transactional
-    public List<ClassResponseDTO> getClasses() {
+    public List<ClassesResponseDTO> getClasses() {
         List<Classes> allClasses = classRepository.findAll();
 
         return allClasses.stream()
@@ -52,8 +52,8 @@ public class ClassServiceImpl implements ClassService {
                 .toList();
     }
 
-    private ClassResponseDTO fetchTrainer(Classes classes) {
-        String url = trainerServiceUrl + "/" + classes.getTrainerID().getId();
+    private ClassesResponseDTO fetchTrainer(Classes classes) {
+        String url = trainerServiceUrl + "/" + classes.getTrainerID().getTrainerId();
         TrainerDTO trainerDTO = restTemplate.getForObject(url, TrainerDTO.class);
 
         return classMapper.toDTO(classes, trainerDTO);
