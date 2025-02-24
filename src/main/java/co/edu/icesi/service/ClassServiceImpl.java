@@ -6,6 +6,7 @@ import co.edu.icesi.dto.TrainerDTO;
 import co.edu.icesi.mappers.ClassMapper;
 import co.edu.icesi.persistence.model.Classes;
 import co.edu.icesi.persistence.repository.ClassRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    @Transactional
     public boolean scheduleClass(ClassDTO classDTO) {
         Classes classes = classMapper.toClass(classDTO);
         Classes savedClass = classRepository.save(classes);
@@ -40,6 +42,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    @Transactional
     public List<ClassResponseDTO> getClasses() {
         List<Classes> allClasses = classRepository.findAll();
 
